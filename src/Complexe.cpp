@@ -3,6 +3,7 @@
 #include <ostream>
 #include <cmath>
 #include "complexe.h"
+#include "complexes.h"
 
 Complexe::Complexe()
 {
@@ -14,28 +15,28 @@ Complexe::Complexe(double re, double im)
 {
     this->re = re;
     this->im = im;
-	std::cout << "+++Complexe(" << re <<","<< im << ")@" << this << std::endl;
+	std::cout << "+++Complexe(" << re <<","<< im << ") @" << this << std::endl;
 
 }
 Complexe::Complexe(Complexe& y)
 {
     re = y.re;
     im = y.im;
-	std::cout << "rrrComplexe(" << re <<"+i."<< im << ")@" << this << std::endl;
+	std::cout << "rrrComplexe(" << re <<"+i."<< im << ") @" << this << std::endl;
 }
 Complexe::~Complexe(){
-	std::cout <<"---Complexe(" << re <<","<< im << ")@" << this << std::endl;
+	std::cout <<"---Complexe(" << re <<","<< im << ") @" << this << std::endl;
 }
-double Complexe::getReel()
+double Complexe::getReel() const
 {
     return re;
 }
-double Complexe::getIm()
+double Complexe::getIm() const
 {
     return im;
 }
 //ρ = |a + bi| = √(a^2+ b^2)
-double Complexe::getModule()
+double Complexe::getModule() const
 {
     double res = 0;
     res = sqrt(pow(re, 2) + pow(im, 2));
@@ -47,7 +48,7 @@ double Complexe::getModule()
  	π + arctan(- b/a) si a > 0
  	π / 2 si a = 0
 	*/
-double Complexe::getArg()
+double Complexe::getArg() const
 {
     double arg = 0;
     if (re > 0)
@@ -66,7 +67,7 @@ double Complexe::getArg()
 }
 void Complexe::affiche()
 {
-    std::cout << re << "+i." << im;
+    std::cout << re << "+i." << im << std::endl;
 }
 void Complexe::echange()
 {

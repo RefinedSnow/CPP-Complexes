@@ -12,7 +12,7 @@ LFLAGS   = -W -Wall -I. -I$(INCDIR) -lm
 
 all: $(BINDIR)/complexe
 
-$(BINDIR)/complexe: $(OBJDIR)/Main.o $(OBJDIR)/Complexe.o
+$(BINDIR)/complexe: $(OBJDIR)/Main.o $(OBJDIR)/Complexe.o $(OBJDIR)/complexes.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp

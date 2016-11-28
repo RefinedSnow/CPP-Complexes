@@ -12,10 +12,10 @@ class Complexe
 	Complexe(double re, double im);
 	Complexe(Complexe& y);
 	~Complexe();
-	double getReel();
-	double getIm();
-	double getModule();
-	double getArg();
+	double getReel() const;
+	double getIm() const;
+	double getModule() const;
+	double getArg() const;
 	void affiche();
 	void echange();
 	friend Complexe operator+(Complexe x, Complexe y);
