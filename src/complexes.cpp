@@ -11,7 +11,7 @@ Complexe normalise(const Complexe x){
 	Complexe res(a,b);
 	return res;
 }
-Complexe rotation(Complexe & x, double angle){
+Complexe rotation(const Complexe & x, double angle){
 	double arg = x.getArg() + angle;
 	double a = x.getModule() * cos(arg);
 	double b = x.getModule() * sin(arg);
@@ -25,4 +25,11 @@ Complexe & pgModule(Complexe & x, Complexe & y){
 	}
 	return x;
 }
-//void racine(int nbElem, Complexe tab[]);
+void racine(int nbElem, Complexe tab[]){
+	std::cout << "Creation des racine eniemes  " <<std::endl;
+	for(int i = 0; i < nbElem ; i++){
+		double a = cos((2*i*M_PI)/nbElem);
+		double b = sin((2*i*M_PI)/nbElem);
+		tab[i] = Complexe(a,b);
+	}
+}

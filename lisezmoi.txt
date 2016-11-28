@@ -1,6 +1,6 @@
 #################
-#   Exercice 1  #
+#      TP2      #
 #################
-4 )
+1.4 )
 Il n'est pas possible de créer un second constructeur avec un argument et un module.
 En effet il ne peut y avoir deux constructeur de même signature.
