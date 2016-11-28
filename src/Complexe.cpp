@@ -59,3 +59,21 @@ class Complexe{
 		im = tmp;
 	}
 };
+Complexe operator+(Complexe x, Complexe y){
+	Complexe res;
+	res.re = x.re + y.re;
+	res.im = x.im + y.im;
+	return res;
+}
+Complexe operator-(Complexe x, Complexe y){
+	Complexe res;
+	res.re = x.re - y.re;
+	res.im -= x.im - y.im;
+	return res;
+}
+Complexe operator*(Complexe x, Complexe y){
+	Complexe res;
+	res.re = (x.re * y.re) - (x.im * y.im);
+	res.im = (x.re + y.im) + (x.im * y.re);
+	return res;
+}
