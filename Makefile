@@ -7,13 +7,13 @@ OBJDIR   = obj
 BINDIR   = bin
 INCDIR   = include
 
-CFLAGS   = -W -Wall -I. -I$(INCDIR)
+CFLAGS   = -W -Wall -I. -I$(INCDIR) 
 LFLAGS   = -W -Wall -I. -I$(INCDIR) -lm
 
 all: $(BINDIR)/complexe
 
 $(BINDIR)/complexe: $(OBJDIR)/Main.o $(OBJDIR)/Complexe.o $(OBJDIR)/complexes.o
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $(LFLAGS) $^ -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -1,6 +1,148 @@
-#################
+﻿#################
 #      TP2      #
 #################
 1.4 )
 Il n'est pas possible de créer un second constructeur avec un argument et un module.
 En effet il ne peut y avoir deux constructeur de même signature.
+
+3)
+...\bin>complexe.exe
+
++++Complexe(1,1) @0x22fdf0
++++Complexe(2,2) @0x22fde0
+Normalisation de 1+i.1
+rrrComplexe(1+i.1) @0x22fe10
++++Complexe(0.707107,0.707107) @0x22fe00
+---Complexe(0.707107,0.707107) @0x22fe00
+---Complexe(1,1) @0x22fe10
+Rotation de 1+i.1
++++Complexe(-1.36603,0.366025) @0x22fe20
+---Complexe(-1.36603,0.366025) @0x22fe20
+Plus grand module entre  1+i.1
+et  2+i.2
+2+i.2
+Initialisation du tableau
++++Complexe() @0x22fd40
++++Complexe() @0x22fd50
++++Complexe() @0x22fd60
++++Complexe() @0x22fd70
++++Complexe() @0x22fd80
++++Complexe() @0x22fd90
++++Complexe() @0x22fda0
++++Complexe() @0x22fdb0
++++Complexe() @0x22fdc0
++++Complexe() @0x22fdd0
+Creation des racine eniemes
++++Complexe(1,0) @0x22fcd0
+---Complexe(1,0) @0x22fcd0
++++Complexe(0.809017,0.587785) @0x22fcd0
+---Complexe(0.809017,0.587785) @0x22fcd0
++++Complexe(0.309017,0.951057) @0x22fcd0
+---Complexe(0.309017,0.951057) @0x22fcd0
++++Complexe(-0.309017,0.951057) @0x22fcd0
+---Complexe(-0.309017,0.951057) @0x22fcd0
++++Complexe(-0.809017,0.587785) @0x22fcd0
+---Complexe(-0.809017,0.587785) @0x22fcd0
++++Complexe(-1,1.22461e-016) @0x22fcd0
+---Complexe(-1,1.22461e-016) @0x22fcd0
++++Complexe(-0.809017,-0.587785) @0x22fcd0
+---Complexe(-0.809017,-0.587785) @0x22fcd0
++++Complexe(-0.309017,-0.951057) @0x22fcd0
+---Complexe(-0.309017,-0.951057) @0x22fcd0
++++Complexe(0.309017,-0.951057) @0x22fcd0
+---Complexe(0.309017,-0.951057) @0x22fcd0
++++Complexe(0.809017,-0.587785) @0x22fcd0
+---Complexe(0.809017,-0.587785) @0x22fcd0
+---Complexe(0.809017,-0.587785) @0x22fdd0
+---Complexe(0.309017,-0.951057) @0x22fdc0
+---Complexe(-0.309017,-0.951057) @0x22fdb0
+---Complexe(-0.809017,-0.587785) @0x22fda0
+---Complexe(-1,1.22461e-016) @0x22fd90
+---Complexe(-0.809017,0.587785) @0x22fd80
+---Complexe(-0.309017,0.951057) @0x22fd70
+---Complexe(0.309017,0.951057) @0x22fd60
+---Complexe(0.809017,0.587785) @0x22fd50
+---Complexe(1,0) @0x22fd40
+---Complexe(2,2) @0x22fde0
+---Complexe(1,1) @0x22fdf0
+
+Lorsque le tableau est initialisé, une objet "Complexe" vide est créé pour chaque case.
+Ensuite lors du calcul et du remplissage de ce tableau un objet tampon est créé à chaque tour de boucle puis immédiatement détruit après avoir été stocké dans le tableau.
+
+Ajout de l'option de compilation : -fno-elide-constructors
+
+On constate qu'au niveau du tableau ça ne change rien. Pour le reste on voit dans les traces que des copies sont apparues.
+En effet par défaut le compilateur supprime les copies qu'il juge intuiles.
+Cette option permet d'outrepasser le compilateur et de le forcer à copier.
+Puisque nous avons défini notre constructeur de copie : c'est celui qui va être utilisé par défaut.
+
+...>mingw32-make
+"Compile src/Main.cpp OK"
+"Compile src/Complexe.cpp OK"
+"Compile src/complexes.cpp OK"
+
+g++ -W -Wall -I. -Iinclude -lm -fno-elide-constructors obj/Main.o obj/Complexe.o
+ obj/complexes.o -o bin/complexe
+
+...>bin\complexe.exe
++++Complexe(1,1) @0x22fdf0
++++Complexe(2,2) @0x22fde0
+Normalisation de 1+i.1
+rrrComplexe(1+i.1) @0x22fe10
++++Complexe(0.707107,0.707107) @0x22fce0
+rrrComplexe(0.707107+i.0.707107) @0x22fe00
+---Complexe(0.707107,0.707107) @0x22fce0
+---Complexe(0.707107,0.707107) @0x22fe00
+---Complexe(1,1) @0x22fe10
+Rotation de 1+i.1
++++Complexe(-1.36603,0.366025) @0x22fcd0
+rrrComplexe(-1.36603+i.0.366025) @0x22fe20
+---Complexe(-1.36603,0.366025) @0x22fcd0
+---Complexe(-1.36603,0.366025) @0x22fe20
+Plus grand module entre  1+i.1
+et  2+i.2
+2+i.2
+Initialisation du tableau statique
++++Complexe() @0x22fd40
++++Complexe() @0x22fd50
++++Complexe() @0x22fd60
++++Complexe() @0x22fd70
++++Complexe() @0x22fd80
++++Complexe() @0x22fd90
++++Complexe() @0x22fda0
++++Complexe() @0x22fdb0
++++Complexe() @0x22fdc0
++++Complexe() @0x22fdd0
+Creation des racine eniemes
++++Complexe(1,0) @0x22fce0
+---Complexe(1,0) @0x22fce0
++++Complexe(0.809017,0.587785) @0x22fce0
+---Complexe(0.809017,0.587785) @0x22fce0
++++Complexe(0.309017,0.951057) @0x22fce0
+---Complexe(0.309017,0.951057) @0x22fce0
++++Complexe(-0.309017,0.951057) @0x22fce0
+---Complexe(-0.309017,0.951057) @0x22fce0
++++Complexe(-0.809017,0.587785) @0x22fce0
+---Complexe(-0.809017,0.587785) @0x22fce0
++++Complexe(-1,1.22461e-016) @0x22fce0
+---Complexe(-1,1.22461e-016) @0x22fce0
++++Complexe(-0.809017,-0.587785) @0x22fce0
+---Complexe(-0.809017,-0.587785) @0x22fce0
++++Complexe(-0.309017,-0.951057) @0x22fce0
+---Complexe(-0.309017,-0.951057) @0x22fce0
++++Complexe(0.309017,-0.951057) @0x22fce0
+---Complexe(0.309017,-0.951057) @0x22fce0
++++Complexe(0.809017,-0.587785) @0x22fce0
+---Complexe(0.809017,-0.587785) @0x22fce0
+---Complexe(0.809017,-0.587785) @0x22fdd0
+---Complexe(0.309017,-0.951057) @0x22fdc0
+---Complexe(-0.309017,-0.951057) @0x22fdb0
+---Complexe(-0.809017,-0.587785) @0x22fda0
+---Complexe(-1,1.22461e-016) @0x22fd90
+---Complexe(-0.809017,0.587785) @0x22fd80
+---Complexe(-0.309017,0.951057) @0x22fd70
+---Complexe(0.309017,0.951057) @0x22fd60
+---Complexe(0.809017,0.587785) @0x22fd50
+---Complexe(1,0) @0x22fd40
+---Complexe(2,2) @0x22fde0
+---Complexe(1,1) @0x22fdf0
