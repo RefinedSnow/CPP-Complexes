@@ -8,16 +8,23 @@ Complexe::Complexe()
 {
     re = 0;
     im = 0;
+	std::cout << "+++Complexe() @"<< this << std::endl;
 }
 Complexe::Complexe(double re, double im)
 {
     this->re = re;
     this->im = im;
+	std::cout << "+++Complexe(" << re <<","<< im << ")@" << this << std::endl;
+
 }
 Complexe::Complexe(Complexe& y)
 {
     re = y.re;
     im = y.im;
+	std::cout << "rrrComplexe(" << re <<"+i."<< im << ")@" << this << std::endl;
+}
+Complexe::~Complexe(){
+	std::cout <<"---Complexe(" << re <<","<< im << ")@" << this << std::endl;
 }
 double Complexe::getReel()
 {

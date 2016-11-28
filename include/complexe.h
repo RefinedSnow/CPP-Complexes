@@ -11,6 +11,7 @@ class Complexe
 	Complexe();
 	Complexe(double re, double im);
 	Complexe(Complexe& y);
+	~Complexe();
 	double getReel();
 	double getIm();
 	double getModule();
